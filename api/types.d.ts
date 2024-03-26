@@ -1,5 +1,4 @@
 import user from './models/User';
-import mongoose from 'mongoose';
 
 export interface UserFields {
   username: string;

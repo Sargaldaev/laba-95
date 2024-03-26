@@ -75,7 +75,8 @@ usersRouter.post('/google', async (req, res, next) => {
     }
 
     const email = payload['email'];
-    const picture = payload['picture'];
+    const username = payload['name'];
+    const avatar = payload['picture'];
     const id = payload['sub'];
     const displayName = payload['name'];
     if (!email) {
@@ -85,11 +86,12 @@ usersRouter.post('/google', async (req, res, next) => {
 
     if (!user) {
       user = new User({
-        username: email,
+        email,
+        username,
         password: crypto.randomUUID(),
         googleID: id,
         displayName,
-        picture,
+        avatar,
       });
     }
 
