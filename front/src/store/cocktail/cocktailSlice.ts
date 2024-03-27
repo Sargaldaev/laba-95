@@ -1,20 +1,23 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Cocktail, CocktailFullInfo } from '../../types';
-import { fetchData, getFullInfo } from './cocktailThunk.ts';
+import { deleteCocktail, fetchData, getFullInfo, publishedCocktail } from './cocktailThunk.ts';
 
 export interface CocktailState {
   cocktails: Cocktail[];
   cocktailFullInfo: CocktailFullInfo | null;
   fetchLoad: boolean;
+  deleteLoad: string;
   fetchLoadFullInfo: boolean;
-
+  publishedLoad:string
 }
 
 const initialState: CocktailState = {
   cocktails: [],
-  cocktailFullInfo:null,
+  cocktailFullInfo: null,
   fetchLoad: false,
   fetchLoadFullInfo: false,
+  deleteLoad: '',
+  publishedLoad:''
 };
 
 export const cocktailSlice = createSlice({
@@ -43,6 +46,28 @@ export const cocktailSlice = createSlice({
     });
     builder.addCase(getFullInfo.rejected, (state: CocktailState, action) => {
       state.fetchLoadFullInfo = false;
+    });
+
+
+    builder.addCase(deleteCocktail.pending, (state: CocktailState,action) => {
+      state.deleteLoad = action.meta.arg || '' ;
+    });
+    builder.addCase(deleteCocktail.fulfilled, (state: CocktailState) => {
+      state.deleteLoad = '';
+    });
+    builder.addCase(deleteCocktail.rejected, (state: CocktailState) => {
+      state.deleteLoad = '';
+    });
+
+
+    builder.addCase(publishedCocktail.pending, (state: CocktailState,action) => {
+      state.publishedLoad = action.meta.arg || '' ;
+    });
+    builder.addCase(publishedCocktail.fulfilled, (state: CocktailState) => {
+      state.publishedLoad = '';
+    });
+    builder.addCase(publishedCocktail.rejected, (state: CocktailState) => {
+      state.publishedLoad = '';
     });
 
   },

@@ -13,7 +13,10 @@ export interface User {
 
 export interface Cocktail {
   _id: string;
-  user: string;
+  user: {
+    _id:string,
+    role:string
+  };
   name: string;
   image: string;
   recipe: string;

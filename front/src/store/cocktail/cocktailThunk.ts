@@ -25,3 +25,19 @@ export const getFullInfo = createAsyncThunk<CocktailFullInfo, string>(
     }
   },
 );
+
+
+export const deleteCocktail = createAsyncThunk<void, string>(
+  'cocktail/deleteCocktail',
+  async (_id) => {
+    try {
+      await axiosApi.delete(`/cocktails/${_id}`);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+);
+
+export const publishedCocktail = createAsyncThunk<void, string>('album/publishedCocktail', async (_id) => {
+  await axiosApi.patch(`/cocktails/${_id}/togglePublished`);
+});
