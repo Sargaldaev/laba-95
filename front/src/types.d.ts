@@ -1,8 +1,8 @@
 export interface User {
-  _id:string;
+  _id: string;
   username: string;
   displayName: string;
-  email:string;
+  email: string;
   googleID: string;
   avatar: string;
   password: string;
@@ -11,9 +11,36 @@ export interface User {
 }
 
 
+export interface Cocktail {
+  _id: string;
+  user: string;
+  name: string;
+  image: string;
+  recipe: string;
+  isPublished: boolean;
+  ingredients: [];
+}
+
+export interface CocktailFullInfo {
+  _id: string;
+  user: string;
+  name: string;
+  image: string;
+  recipe: string;
+  isPublished: boolean;
+  ingredients: Ingredient[];
+}
+
+export interface Ingredient {
+  _id: string,
+  name: string,
+  amount: string
+}
+
+
 export interface Register {
   username: string;
-  email:string;
+  email: string;
   password: string;
   displayName: string;
   avatar: File | null;

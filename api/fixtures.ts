@@ -26,7 +26,7 @@ const run = async () => {
       token: crypto.randomUUID(),
     },
     {
-      username:'Rob',
+      username:'Roby',
       email: 'roby@gmail.com',
       displayName: 'Roby Li',
       role: 'user',

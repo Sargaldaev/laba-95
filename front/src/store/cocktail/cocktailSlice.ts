@@ -1,0 +1,51 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Cocktail, CocktailFullInfo } from '../../types';
+import { fetchData, getFullInfo } from './cocktailThunk.ts';
+
+export interface CocktailState {
+  cocktails: Cocktail[];
+  cocktailFullInfo: CocktailFullInfo | null;
+  fetchLoad: boolean;
+  fetchLoadFullInfo: boolean;
+
+}
+
+const initialState: CocktailState = {
+  cocktails: [],
+  cocktailFullInfo:null,
+  fetchLoad: false,
+  fetchLoadFullInfo: false,
+};
+
+export const cocktailSlice = createSlice({
+  name: 'cocktail',
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(fetchData.pending, (state: CocktailState) => {
+      state.fetchLoad = true;
+    });
+    builder.addCase(fetchData.fulfilled, (state: CocktailState, action: PayloadAction<Cocktail[]>) => {
+      state.fetchLoad = false;
+      state.cocktails = action.payload;
+    });
+    builder.addCase(fetchData.rejected, (state: CocktailState, action) => {
+      state.fetchLoad = false;
+    });
+
+
+    builder.addCase(getFullInfo.pending, (state: CocktailState) => {
+      state.fetchLoadFullInfo = true;
+    });
+    builder.addCase(getFullInfo.fulfilled, (state: CocktailState, action: PayloadAction<Cocktail>) => {
+      state.fetchLoadFullInfo = false;
+      state.cocktailFullInfo = action.payload || null;
+    });
+    builder.addCase(getFullInfo.rejected, (state: CocktailState, action) => {
+      state.fetchLoadFullInfo = false;
+    });
+
+  },
+});
+
+export const cocktailReducer = cocktailSlice.reducer;
