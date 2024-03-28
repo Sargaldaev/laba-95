@@ -17,7 +17,6 @@ const run = async () => {
 
   const [user1, user2, user3] = await User.create(
     {
-      username:'Triss',
       email: 'tim@gmail.com',
       displayName: 'Tim Smith',
       role: 'admin',
@@ -26,7 +25,6 @@ const run = async () => {
       token: crypto.randomUUID(),
     },
     {
-      username:'Roby',
       email: 'roby@gmail.com',
       displayName: 'Roby Li',
       role: 'user',
@@ -35,7 +33,6 @@ const run = async () => {
       token: crypto.randomUUID(),
     },
     {
-      username:'Pablo',
       email: 'paul@gmail.com',
       displayName: 'Paul',
       role: 'user',

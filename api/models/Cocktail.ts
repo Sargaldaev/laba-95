@@ -40,9 +40,10 @@ const CocktailSchema = new Schema({
     type: [],
     validate: {
       validator: (arr: Ingredient[]) => arr.length,
-      message: "Ingredients array can't be empty",
+      message: 'Ingredients array can\'t be empty',
     }
   },
+
 });
 
 const Cocktail = mongoose.model('Cocktail', CocktailSchema);

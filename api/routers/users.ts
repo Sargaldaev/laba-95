@@ -13,7 +13,6 @@ const client = new OAuth2Client(config.google.clientId);
 usersRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
   try {
     const user = new User({
-      username: req.body.username,
       email: req.body.email,
       password: req.body.password,
       displayName: req.body.displayName,
@@ -34,20 +33,18 @@ usersRouter.post('/', imagesUpload.single('avatar'), async (req, res, next) => {
 
 usersRouter.post('/sessions', async (req, res, next) => {
   try {
-    console.log(req.body.password);
-    console.log(req.body.username);
-    const user = await User.findOne({ username: req.body.username });
+    const user = await User.findOne({ username: req.body.email });
 
     if (!user) {
-      return res.status(400).send({ error: 'Wrong username or password ' });
+      return res.status(400).send({ error: 'Wrong email or password ' });
     }
     if (!req.body.password) {
-      return res.status(400).send({ error: 'Wrong username or password' });
+      return res.status(400).send({ error: 'Wrong email or password' });
     }
     const isMatch = await user.checkPassword(req.body.password);
 
     if (!isMatch) {
-      return res.status(400).send({ error: 'Wrong username or password ' });
+      return res.status(400).send({ error: 'Wrong email or password ' });
     }
 
     user.generateToken();
@@ -75,7 +72,6 @@ usersRouter.post('/google', async (req, res, next) => {
     }
 
     const email = payload['email'];
-    const username = payload['name'];
     const avatar = payload['picture'];
     const id = payload['sub'];
     const displayName = payload['name'];
@@ -87,7 +83,6 @@ usersRouter.post('/google', async (req, res, next) => {
     if (!user) {
       user = new User({
         email,
-        username,
         password: crypto.randomUUID(),
         googleID: id,
         displayName,

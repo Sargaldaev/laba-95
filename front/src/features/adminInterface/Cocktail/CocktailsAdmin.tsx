@@ -32,6 +32,12 @@ const CocktailsAdmin = () => {
 
   return (
     <>
+      {
+        !cocktails.length &&
+        <Typography variant='h5' component='h5' sx={{ padding: '10px' }}>
+          No published cocktails yet
+        </Typography>
+      }
       <Box>
         <Box display={'flex'} flexWrap={'wrap'} sx={{gap: '20px'}}>
           {fetchLoad ? (

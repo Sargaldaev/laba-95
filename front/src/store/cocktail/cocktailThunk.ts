@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Cocktail, CocktailFullInfo } from '../../types';
+import { Cocktail, CocktailFullInfo, PostCocktail } from '../../types';
 import axiosApi from '../../axiosApi.ts';
 
-export const fetchData = createAsyncThunk<Cocktail[]>(
+export const fetchData = createAsyncThunk<Cocktail[], string>(
   'cocktail/fetchData',
-  async () => {
+  async (id) => {
     try {
-      const {data} = await axiosApi.get<Cocktail[]>('/cocktails');
+      const {data} = await axiosApi.get<Cocktail[]>(`/cocktails?userId=${id}`);
       return data;
     } catch (e) {
       console.log(e);
@@ -25,6 +25,32 @@ export const getFullInfo = createAsyncThunk<CocktailFullInfo, string>(
     }
   },
 );
+
+
+export const addCocktail = createAsyncThunk<void, PostCocktail>(
+  'cocktails/addOne',
+  async (cocktail: PostCocktail) => {
+    try {
+      const itemData = new FormData();
+      const keys = Object.keys(cocktail) as (keyof PostCocktail)[];
+
+      keys.forEach((key) => {
+        const value = cocktail[key] as string | File;
+
+        if (key === 'ingredients' && Array.isArray(value)) {
+          itemData.append(key, JSON.stringify(value));
+          return;
+        }
+        itemData.append(key, value);
+      });
+
+      await axiosApi.post('/cocktails', itemData);
+    } catch (e) {
+      console.log(e);
+    }
+  },
+);
+
 
 
 export const deleteCocktail = createAsyncThunk<void, string>(

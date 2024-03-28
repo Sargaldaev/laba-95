@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Button, Menu, MenuItem } from '@mui/material';
 import { User } from '../../types';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../app/store.ts';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../app/store.ts';
 import { logout } from '../../store/user/userThunk';
 import CardMedia from '@mui/material/CardMedia';
 import Card from '@mui/material/Card';
 import { apiUrl } from '../../constants.ts';
+import { Link } from 'react-router-dom';
 
 interface Props {
   user: User;
@@ -56,6 +57,19 @@ const UserMenu: React.FC<Props> = ({ user }) => {
       </Box>
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem onClick={handleLogout}>Logout</MenuItem>
+        <MenuItem>
+          <Link
+            to='/addCocktail'
+            style={{ color: 'white', textDecoration: 'none' }}
+          >Add cocktail</Link>
+        </MenuItem>
+        <MenuItem>
+        <Link
+          to='/myCocktails'
+          style={{ color: 'white', textDecoration: 'none' }}
+        >My cocktails</Link>
+        </MenuItem>
+
       </Menu>
 
     </>

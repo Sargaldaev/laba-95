@@ -52,10 +52,7 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
     required: true,
     type: String,
   },
-  username: {
-    required: true,
-    type: String,
-  },
+
   avatar: {
     type:String,
     required:true

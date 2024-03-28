@@ -59,7 +59,7 @@ const CocktailFullInfo = () => {
                   <span style={{display: 'inline-block', fontWeight: 700, marginRight: 1, color: 'blue'}}>
                     name:
                   </span>
-                    {item.name},
+                    {item.name}
                   </Typography>
 
                   <Typography key={item._id}>

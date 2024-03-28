@@ -1,15 +1,21 @@
 export interface User {
   _id: string;
-  username: string;
   displayName: string;
   email: string;
-  googleID: string;
+  googleID: string | null;
   avatar: string;
   password: string;
   role: string;
   token: string;
 }
 
+export interface PostCocktail {
+  name: string;
+  user: string;
+  image: File | null;
+  recipe: string;
+  ingredients: Ingredient[];
+}
 
 export interface Cocktail {
   _id: string;
@@ -42,7 +48,6 @@ export interface Ingredient {
 
 
 export interface Register {
-  username: string;
   email: string;
   password: string;
   displayName: string;
@@ -50,7 +55,7 @@ export interface Register {
 }
 
 export interface Login {
-  username: string;
+  email: string;
   password: string;
 }
 

@@ -15,10 +15,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import CircularProgress from '@mui/material/CircularProgress';
-import { AppDispatch, RootState } from '../../app/store';
+import { AppDispatch, RootState } from '../../../../app/store.ts';
 import { useDispatch, useSelector } from 'react-redux';
-import { Login } from '../../types';
-import { googleLogin, login } from '../../store/user/userThunk';
+import { Login } from '../../../../types';
+import { googleLogin, login } from '../../../../store/user/userThunk.ts';
 import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
@@ -26,7 +26,7 @@ const Login = () => {
   const { loginError: error, loginLoad } = useSelector((state: RootState) => state.user);
   const navigate = useNavigate();
   const [users, setUsers] = useState<Login>({
-    username: '',
+    email: '',
     password: '',
   });
   const darkTheme = createTheme({
@@ -90,7 +90,7 @@ const Login = () => {
                 }
               }}
               onError={() => {
-                console.log('log');
+                console.log('error');
               }}
             />
           </Box>
@@ -98,10 +98,10 @@ const Login = () => {
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <TextField
-                  label="username"
-                  name="username"
-                  autoComplete="new-username"
-                  value={users.username}
+                  label="email"
+                  name="email"
+                  autoComplete="new-email"
+                  value={users.email}
                   onChange={onChange}
                   fullWidth={true}
                   required

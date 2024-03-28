@@ -13,11 +13,11 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import CircularProgress from '@mui/material/CircularProgress';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../app/store';
-import {  googleLogin, register } from '../../store/user/userThunk';
-import { Register } from '../../types';
+import { AppDispatch, RootState } from '../../../../app/store.ts';
+import {  googleLogin, register } from '../../../../store/user/userThunk.ts';
+import { Register } from '../../../../types';
 import { GoogleLogin } from '@react-oauth/google';
-import InputFile from '../InputFile/InputFile.tsx';
+import InputFile from '../../../../components/InputFile/InputFile.tsx';
 
 const darkTheme = createTheme({
   palette: {
@@ -30,7 +30,6 @@ const Register = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
   const [users, setUsers] = useState<Register>({
-    username: '',
     email:'',
     password: '',
     displayName: '',
@@ -98,21 +97,6 @@ const Register = () => {
             />
 
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="username"
-                  label="username"
-                  name="username"
-                  autoComplete="new-username"
-                  onChange={onChange}
-                  value={users.username}
-                  error={Boolean(getFieldError('username'))}
-                  helperText={getFieldError('username')}
-                />
-              </Grid>
-
               <Grid item xs={12}>
                 <TextField
                   required
