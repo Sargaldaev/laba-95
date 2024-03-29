@@ -1,11 +1,13 @@
 import { useEffect } from 'react';
 import { Box, CardMedia, Container, Grid, LinearProgress, Paper, Stack, Typography } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store.ts';
 import { fetchData } from '../../../store/cocktail/cocktailThunk.ts';
 import { apiUrl } from '../../../constants.ts';
 import './myCocktails.css'
+import Button from '@mui/material/Button';
+import * as React from 'react';
 
 const MyCocktails = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -23,6 +25,9 @@ const MyCocktails = () => {
 
   return (
     <Container sx={{mt: 4}}>
+      <Button component={Link} to={`/`} size="small">
+        Back
+      </Button>
       {
         fetchLoad &&
         <Box sx={{width: '100%', height: '4px'}}>

@@ -68,7 +68,7 @@ const CocktailsAdmin = () => {
                       image={apiUrl + cocktail.image}
                     />
                     <CardContent
-                      sx={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}
+                      sx={{display: 'flex', flexDirection: 'column', position:'relative',alignItems: 'center'}}
                     >
                       <Typography gutterBottom variant="h5" component="div">
                         {cocktail.name}
@@ -82,7 +82,7 @@ const CocktailsAdmin = () => {
                         <CircularProgress/>
                       ) : (
                         <Button
-                          className="btn ms-1 btn-primary "
+                          sx={{position:'absolute',top:320,left:10,color:'tomato',fontWeight:700}}
                           disabled={deleteLoad === cocktail._id}
                           onClick={() => deleteCocktailId(cocktail._id)}
                         >
@@ -93,7 +93,7 @@ const CocktailsAdmin = () => {
                         <CircularProgress/>
                       ) : (
                         <Button
-                          className="btn ms-1 btn-primary "
+                          sx={{position:'absolute',top:320,right:20,fontWeight:700}}
                           onClick={() => togglePublishedCocktail(cocktail._id)}
                         >
                           {cocktail.isPublished ? 'UnPublish' : 'Publish'}

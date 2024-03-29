@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { Cocktail, CocktailFullInfo, PostCocktail } from '../../types';
+import { Cocktail, PostCocktail } from '../../types';
 import axiosApi from '../../axiosApi.ts';
+
 
 export const fetchData = createAsyncThunk<Cocktail[], string>(
   'cocktail/fetchData',
@@ -29,7 +30,7 @@ export const getFullInfo = createAsyncThunk<CocktailFullInfo, string>(
 
 export const addCocktail = createAsyncThunk<void, PostCocktail>(
   'cocktails/addOne',
-  async (cocktail: PostCocktail) => {
+  async (cocktail) => {
     try {
       const itemData = new FormData();
       const keys = Object.keys(cocktail) as (keyof PostCocktail)[];
@@ -52,7 +53,6 @@ export const addCocktail = createAsyncThunk<void, PostCocktail>(
 );
 
 
-
 export const deleteCocktail = createAsyncThunk<void, string>(
   'cocktail/deleteCocktail',
   async (_id) => {
@@ -64,6 +64,7 @@ export const deleteCocktail = createAsyncThunk<void, string>(
   },
 );
 
-export const publishedCocktail = createAsyncThunk<void, string>('album/publishedCocktail', async (_id) => {
+
+export const publishedCocktail = createAsyncThunk<void, string>('cocktail/publishedCocktail', async (_id) => {
   await axiosApi.patch(`/cocktails/${_id}/togglePublished`);
 });

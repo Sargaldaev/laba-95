@@ -1,6 +1,9 @@
+import mongoose, { Schema } from 'mongoose';
+import Types = module;
+
 export interface UserFields {
   displayName: string;
-  email:string;
+  email: string;
   googleID?: string;
   avatar: string;
   password: string;
@@ -8,12 +11,24 @@ export interface UserFields {
   token: string;
 }
 
-
 export interface ExistingUser extends UserFields {
   _id: string;
 }
 
-export interface Ingredient {
+export interface Rating {
+  user: Types.ObjectId;
+  grade: number;
+}
+
+export interface Cocktail {
+  user: Types.ObjectId;
   name: string;
-  amount: string;
+  image: string | null;
+  recipe: string;
+  isPublished?: boolean;
+  ingredients: Array<{
+    name: string;
+    quantity: string;
+  }>;
+  rating: Rating[];
 }

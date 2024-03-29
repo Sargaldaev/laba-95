@@ -17,28 +17,26 @@ export interface PostCocktail {
   ingredients: Ingredient[];
 }
 
-export interface Cocktail {
-  _id: string;
-  user: {
-    _id:string,
-    role:string
-  };
-  name: string;
-  image: string;
-  recipe: string;
-  isPublished: boolean;
-  ingredients: [];
+
+export interface Rating {
+  user: string
+  grade: number;
 }
 
-export interface CocktailFullInfo {
+export interface Cocktail {
   _id: string;
-  user: string;
+  user: User;
   name: string;
-  image: string;
+  image: string | null;
   recipe: string;
   isPublished: boolean;
-  ingredients: Ingredient[];
+  ingredients: Array<{
+    name: string;
+    quantity: string;
+  }>;
+  rating: Rating[];
 }
+
 
 export interface Ingredient {
   _id: string,

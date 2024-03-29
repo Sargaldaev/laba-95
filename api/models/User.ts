@@ -25,7 +25,7 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
         email: string,
       ): Promise<boolean> {
         if (!this.isModified('email')) return true;
-        const user: HydratedDocument<UserFields> | null = await User.findOne({email});
+        const user: HydratedDocument<UserFields> | null = await User.findOne({ email });
         return !Boolean(user);
       },
       message: 'This user is already registered',
@@ -54,8 +54,8 @@ const UserSchema = new Schema<UserFields, UserModel, UserMethods>({
   },
 
   avatar: {
-    type:String,
-    required:true
+    type: String,
+    required: true,
   },
 });
 

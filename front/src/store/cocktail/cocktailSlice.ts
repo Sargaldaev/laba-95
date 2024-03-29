@@ -1,15 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Cocktail, CocktailFullInfo } from '../../types';
-import { addCocktail, deleteCocktail, fetchData, getFullInfo, publishedCocktail } from './cocktailThunk.ts';
+import { Cocktail } from '../../types';
+import {
+  addCocktail,
+  deleteCocktail,
+  fetchData,
+  getFullInfo,
+  publishedCocktail
+} from './cocktailThunk.ts';
 
 export interface CocktailState {
   cocktails: Cocktail[];
-  cocktailFullInfo: CocktailFullInfo | null;
+  cocktailFullInfo: Cocktail | null;
   fetchLoad: boolean;
   createLoad: boolean
   deleteLoad: string;
   fetchLoadFullInfo: boolean;
-  publishedLoad:string
+  publishedLoad:string,
 }
 
 const initialState: CocktailState = {
@@ -18,7 +24,7 @@ const initialState: CocktailState = {
   fetchLoad: false,
   fetchLoadFullInfo: false,
   deleteLoad: '',
-  publishedLoad:''
+  publishedLoad:'',
 };
 
 export const cocktailSlice = createSlice({
@@ -33,7 +39,7 @@ export const cocktailSlice = createSlice({
       state.fetchLoad = false;
       state.cocktails = action.payload;
     });
-    builder.addCase(fetchData.rejected, (state: CocktailState, action) => {
+    builder.addCase(fetchData.rejected, (state: CocktailState) => {
       state.fetchLoad = false;
     });
 
@@ -45,7 +51,7 @@ export const cocktailSlice = createSlice({
       state.fetchLoadFullInfo = false;
       state.cocktailFullInfo = action.payload || null;
     });
-    builder.addCase(getFullInfo.rejected, (state: CocktailState, action) => {
+    builder.addCase(getFullInfo.rejected, (state: CocktailState) => {
       state.fetchLoadFullInfo = false;
     });
 
